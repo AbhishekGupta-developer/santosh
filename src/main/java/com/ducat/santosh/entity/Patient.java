@@ -21,4 +21,8 @@ public class Patient {
     @Enumerated(EnumType.STRING)
     private PatientSymptom symptom;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "bill")
+    private Bill bill;
+
 }

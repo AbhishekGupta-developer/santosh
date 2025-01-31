@@ -22,7 +22,7 @@ public class DoctorController {
         return new ResponseEntity<>(doctorService.getDoctor(id), HttpStatusCode.valueOf(200));
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<DoctorOutputDto>> getAllDoctors() {
         return new ResponseEntity<>(doctorService.getAllDoctors(), HttpStatusCode.valueOf(200));
     }

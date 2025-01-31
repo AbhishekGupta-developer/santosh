@@ -1,5 +1,6 @@
 package com.ducat.santosh.dto;
 
+import com.ducat.santosh.entity.Bill;
 import com.ducat.santosh.enums.PatientSymptom;
 import lombok.Data;
 
@@ -11,4 +12,5 @@ public class PatientOutputDto {
     private String email;
     private String phone;
     private PatientSymptom symptom;
+    private Bill bill;
 }

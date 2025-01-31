@@ -3,11 +3,13 @@ package com.ducat.santosh.service;
 import com.ducat.santosh.dto.DoctorOutputDto;
 import com.ducat.santosh.dto.PatientInputDto;
 import com.ducat.santosh.dto.PatientOutputDto;
+import com.ducat.santosh.entity.Bill;
 import com.ducat.santosh.entity.Doctor;
 import com.ducat.santosh.entity.Patient;
 import com.ducat.santosh.enums.DoctorCity;
 import com.ducat.santosh.enums.DoctorSpeciality;
 import com.ducat.santosh.enums.PatientSymptom;
+import com.ducat.santosh.repository.BillRepository;
 import com.ducat.santosh.repository.DoctorRepository;
 import com.ducat.santosh.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class PatientServiceImpl implements PatientService {
 
     @Autowired
     DoctorRepository doctorRepository;
+
+    @Autowired
+    BillRepository billRepository;
 
     @Override
     public PatientOutputDto getPatient(Long id) {
@@ -73,6 +78,13 @@ public class PatientServiceImpl implements PatientService {
         patient.setPhone(patientInputDto.getPhone());
         patient.setSymptom(patientInputDto.getSymptom());
 
+        Bill bill = new Bill();
+        bill.setAmount(1000D);
+
+        bill.setPatient(patient);
+
+        patient.setBill(bill);
+
         patient = patientRepository.save(patient);
 
         PatientOutputDto patientOutputDto = new PatientOutputDto();
@@ -83,6 +95,7 @@ public class PatientServiceImpl implements PatientService {
         patientOutputDto.setEmail(patient.getEmail());
         patientOutputDto.setPhone(patient.getPhone());
         patientOutputDto.setSymptom(patient.getSymptom());
+        patientOutputDto.setBill(patient.getBill());
 
         return patientOutputDto;
     }
